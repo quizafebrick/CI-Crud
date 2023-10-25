@@ -8,7 +8,7 @@
 	}
 </style>
 
-<table id="personalInfoTable" class="display">
+<table id="personalInfoTable" class="display table" style="width: 100%;">
 	<thead>
 		<tr>
 			<th>#</th>

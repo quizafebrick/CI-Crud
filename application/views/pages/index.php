@@ -38,7 +38,7 @@
 <script>
 	$(document).ready(function () {
 		const table = $("#personalInfoTable").DataTable({
-			scrollY: true,
+			scrollX: true,
 			columns: [
 				{
 					data: null, // * USE NULL DATA SOURCE FOR THE NUMBERING COLUMN * //
@@ -352,9 +352,9 @@
 							icon: 'success',
 							title: 'Success',
 							text: "Batch Deleted Successfully!",
+						}).then(() => {
+							location.reload();
 						});
-						
-						table.ajax.reload();
 					},
 					error: function() {
 						Swal.fire({
@@ -368,7 +368,7 @@
 				Swal.fire({
 					icon: "error",
 					title: "Error",
-					text: "No ID(s) selected for batch deletion.",
+					text: "No checkbox/checkboxes selected for batch deletion.",
 
 				});
 
