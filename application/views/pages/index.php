@@ -39,74 +39,15 @@
 	$(document).ready(function () {
 		const table = $("#personalInfoTable").DataTable({
 			scrollX: true,
-			columns: [
-				{
-					data: null, // * USE NULL DATA SOURCE FOR THE NUMBERING COLUMN * //
-					orderable: true, // * DISABLE SORTING FOR THIS COLUMN * //
-					searchable: false, // * DISABLE SEARCHING FOR THIS COLUMN * //
-					render: function (data, type, row, meta) {
-						return meta.row + 1;
-					},
-				},
-				{
-					data: null,
-					sorting: false, 
-					render: function (data, type, row, meta) {
-						return (
-							'<div class="form-check d-flex justify-content-center">' +
-								'<input class="form-check-input" type="checkbox" name="checkboxStudentID" id="checkboxStudentID" data-id="' + row.id + '" value="">' +
-							'</div>'
-						);
-					},
-				},
-				{
-					data: "fullname",
-					searchable: true,
-				},
-				{
-					data: "age",
-					searchable: true,
-				},
-				{
-					data: "gender",
-					searchable: true,
-				},
-				{
-					data: "address",
-					searchable: true,
-				},
-				{
-					data: null,
-					sorting: false,
-					render: function (data, type, row) {
-						return (
-							'<div class="form-check form-switch d-flex justify-content-center">' +
-								'<input class="form-check-input p-2" type="checkbox" name="isStudent" id="is_student" data-id="' + row.id + '" value="1" ' + (row.isStudent == 1 ? ' checked' : '') + '>' +
-							'</div>'
-						);
-					}
-				},
-				{
-					data: null,
-					sorting: false,
-					render: function (data, type, row) {
-						// * ADD ACTION BUTTONS OR ANY OTHER CUSTOM RENDERING HERE * //
-						return (
-							'<button class="btn btn-primary editBtn" id="editBtn" data-fullname="' + row.fullname + '" data-gender="' + row.gender + '" data-address="' + row.address + '" data-age="' + row.age + '" data-id="' + row.id + '">' +
-								'<i class="bi bi-pencil-square"></i>' +
-							'</button > ' + 
-
-							'<button class="btn btn-danger deleteBtn text-white ml-2" id="deleteBtn" data-id="' + row.id + '">'+    
-								'<i class="bi bi-trash3-fill"></i>' +
-							'</button > '
-						);
-					},
-				},
+			columnDefs: [
+				{ targets: [1, 6], orderable: false }, 
 			],
 			ajax: {
 				url: "<?= site_url('PersonalInformation/getInfos') ?>",
-				dataSrc: "",
+				type: "GET"
 			},
+			processing: true,
+			serverSide: true
 		});
 		
 		$("#editForm").hide();

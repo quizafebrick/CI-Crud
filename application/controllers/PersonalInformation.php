@@ -4,20 +4,7 @@ class PersonalInformation extends CI_Controller
 {
 	public function getInfos()
     {
-        $data = $this->PersonalInfo_Model->getInfo();
-
-		$mappedData = array_map(function($info) {
-			return [
-				'id' => base64_encode($info['id']),
-				'fullname' => $info['fullname'],
-				'age' => $info['age'],
-				'gender' => $info['gender'],
-				'address' => $info['address'],
-				'isStudent' => $info['isStudent'],
-			];
-		}, $data);
-        
-        echo json_encode($mappedData);
+        return $this->PersonalInfo_Model->loadDatatable();
     }
 
 	public function index()
