@@ -7,6 +7,11 @@ class PersonalInformation extends CI_Controller
         return $this->PersonalInfo_Model->loadDatatable();
     }
 
+	public function createRandomInfo()
+    {
+        return $this->PersonalInfo_Model->generate_fake_data();
+    }
+
 	public function index()
 	{
 		$page = "index";
@@ -85,6 +90,22 @@ class PersonalInformation extends CI_Controller
 		echo json_encode(['success' => true]);
 	}
 
+	public function updateIsStudentBatch()
+	{
+		$this->load->model('PersonalInfo_Model');
+
+		foreach ($this->input->post('id') as $decryptedID) {
+			$updateIsStudent = $this->PersonalInfo_Model->updateDataBatch(base64_decode($decryptedID));
+
+			if (!$updateIsStudent) {
+				echo json_encode(['success' => false, 'error' => 'Database error']);
+				return;
+			}
+		}
+
+		echo json_encode(['success' => true]);
+	}
+
 	public function destroy()
 	{
 		$this->load->model('PersonalInfo_Model');
@@ -108,6 +129,27 @@ class PersonalInformation extends CI_Controller
 
 		foreach ($this->input->post('id') as $decryptedIDs) {
 			$delete = $this->PersonalInfo_Model->deleteData(base64_decode($decryptedIDs));
+
+			if (!$delete) {
+				$success = false;
+				break;
+			}
+		}
+
+		echo json_encode(['success' => $success]);
+	}
+
+	public function destroyBatchNotStudent()
+	{
+		if (empty($this->input->post('id'))) {
+			echo json_encode(['success' => false, 'error' => 'No IDs provided for batch delete']);
+		}
+
+		$this->load->model('PersonalInfo_Model');
+		$success = true;
+
+		foreach ($this->input->post('id') as $decryptedIDs) {
+			$delete = $this->PersonalInfo_Model->deleteDataBatchNotStudent(base64_decode($decryptedIDs));
 
 			if (!$delete) {
 				$success = false;

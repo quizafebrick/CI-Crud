@@ -11,7 +11,11 @@
 
 	<div class="mt-3">
 		<label for="gender" class="form-label">Gender:</label>
-		<input type="text" class="form-control" name="gender" id="edit_gender">
+		<select name="gender" id="edit_gender" class="form-select">
+			<option selected disabled>-- Select Gender --</option>
+			<option value="MALE">MALE</option>
+			<option value="FEMALE">FEMALE</option>
+		</select>
 	</div>
 
 	<div class="mb-3">
@@ -26,5 +30,7 @@
 </form>
 
 <div>
-	<div type="button" class="text-primary text-underline fw-bold fs-6 text-end text-decoration-underline" id="goBack">Go back to add info</div>
+	<div type="button" class="text-primary text-underline fw-bold fs-6 text-end text-decoration-underline" id="goBack">
+		Go back to add info
+	</div>
 </div>

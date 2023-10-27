@@ -11,7 +11,11 @@
 
 	<div class="mt-3">
 		<label for="gender" class="form-label">Gender:</label>
-		<input type="text" class="form-control" name="gender" id="gender" onkeyup="this.value = this.value.toUpperCase()">
+		<select name="gender" id="gender" class="form-select">
+			<option selected disabled>-- Select Gender --</option>
+			<option value="MALE">MALE</option>
+			<option value="FEMALE">FEMALE</option>
+		</select>
 	</div>
 
 	<div class="mb-3">
